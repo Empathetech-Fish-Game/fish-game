@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { Loader, OrbitControls } from '@react-three/drei';
+import { Loader, OrbitControls, Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import './App.css';
 import * as THREE from 'three';
@@ -28,11 +28,11 @@ export default function App() {
         }}
       >
         <color attach="background" args={['#0a0a0a']} />
-        {/* <Environment
+        {<Environment
           background
           // blur={0}
-          files={'/hall_of_finfish_4k.hdr'}
-        /> */}
+          files={'./hall_of_finfish_4k.hdr'}
+        />}
         <ambientLight intensity={5} />
         <spotLight intensity={2} args={[0, 3, 4]} />
         <pointLight position={[20, 10, -10]} intensity={2} />
