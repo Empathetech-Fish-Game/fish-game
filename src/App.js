@@ -8,8 +8,11 @@ import { Suspense } from 'react';
 import TankWater from './components/TankWater';
 import LowPolyFish from './components/LowPolyFish';
 import { Debug, Physics } from '@react-three/rapier';
-import TankWall from './components/TankWall';
-
+import TankWallRear from './components/TankWallRear';
+import TankWallFront from './components/TankWallFront';
+import TankWallLeft from './components/TankWallLeft';
+import TankWallRight from './components/TankWallRight';
+import TankWallBottom from './components/TankWallBottom';
 export default function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -28,11 +31,11 @@ export default function App() {
         }}
       >
         <color attach="background" args={['#0a0a0a']} />
-        {<Environment
+        {/* {<Environment
           background
-          // blur={0}
+          blur={0.04}
           files={'./hall_of_finfish_4k.hdr'}
-        />}
+        />} */}
         <ambientLight intensity={5} />
         <spotLight intensity={2} args={[0, 3, 4]} />
         <pointLight position={[20, 10, -10]} intensity={2} />
@@ -48,7 +51,12 @@ export default function App() {
         <Physics>
           <Debug />
           <LowPolyFish />
-          <TankWall />
+          <TankWallRear />
+          <TankWallFront />
+          <TankWallLeft />
+          <TankWallRight />
+          <TankWallBottom />
+
           <TankWater />
         </Physics>
       </Canvas>

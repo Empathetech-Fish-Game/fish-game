@@ -12,10 +12,10 @@ export default function TankWater() {
 
     >
       <boxBufferGeometry args={[12, 8, 6]} />
-      <meshBasicMaterial 
+      <meshBasicMaterial
         color="#00ffff"
-        transparent={true} 
-        opacity={0.5} 
+        transparent={true}
+        opacity={0.5}
       />
     </mesh>
   );
