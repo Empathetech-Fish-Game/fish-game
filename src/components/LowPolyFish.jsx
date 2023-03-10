@@ -10,7 +10,7 @@ export default function LowPolyFish() {
   const fish = useGLTF('/models/Fish.glb');
   const fishRef = useRef();
 
-  const rotation = [0, Math.PI / -2, 0];
+  const rotation = [0, 0, 0];
 
 
 
@@ -20,28 +20,31 @@ export default function LowPolyFish() {
 
     const updateFishPathing = (targetFish) => {
       //const fishMovementInPlace = fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
-
+      //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       if (targetFish.current.position.x < -4) {
-        targetFish.rotation = targetFish.rotation + 0; //I'm not sure what this is supposed to be
+        targetFish.rotation.y = targetFish.rotation.y + 180;
       }
-      let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 100
+      let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 1000;
 
-      if (rando > 99) {
-        //don't alter your rotation this time
-      }
-      else {
-        let randRotationX = (Math.random() / 100);
-        let randRotationZ = (Math.random() / 100);
+      if (rando > 95) {
+        const rotationXWeight = 3;
+        const rotationYWeight = 8;
+
+        let randRotationX = (Math.random() / 100 * rotationXWeight);
+        let randRotationY = (Math.random() / 100 * rotationYWeight);
+
+        //half the time, rotate in the other direction.
         if (Math.random() < 0.5) {
           randRotationX = -randRotationX;
         }
         if (Math.random() < 0.5) {
-          randRotationZ = -randRotationZ;
+          randRotationY = -randRotationY;
         }
 
         //rotate the fish along the X and Z axes:
-        fishRef.current.rotation.z - fishRef.current.rotation.z + randRotationZ;
-        fishRef.current.rotation.y = fishRef.current.rotation.y + randRotationX;
+
+        targetFish.current.rotation.x = targetFish.current.rotation.x + randRotationX;
+        targetFish.current.rotation.y = targetFish.current.rotation.y + randRotationY;
         //set new rotation's X value to the old value + randRotationX
         //set new rotation's Z value to the old value + randRotationZ
       }
