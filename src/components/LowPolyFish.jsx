@@ -19,11 +19,16 @@ export default function LowPolyFish() {
     const time = clock.elapsedTime;
 
     const updateFishPathing = (targetFish) => {
+
       //const fishMovementInPlace = fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
-      if (targetFish.current.position.x < -4) {
-        targetFish.rotation.y = targetFish.rotation.y + 180;
+      if (targetFish.current.position.z > 3) {
+        fishRef.current.rotation.y = 160;
       }
+      else if (targetFish.current.position.z < -3) {
+        fishRef.current.rotation.y = 0;
+      }
+
       let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 1000;
 
       if (rando > 95) {
@@ -42,7 +47,7 @@ export default function LowPolyFish() {
         }
 
         //rotate the fish along the X and Y axes:
-        targetFish.current.rotation.x = targetFish.current.rotation.x + randRotationX;
+        //targetFish.current.rotation.x = targetFish.current.rotation.x + randRotationX;
         targetFish.current.rotation.y = targetFish.current.rotation.y + randRotationY;
 
       }
@@ -51,17 +56,25 @@ export default function LowPolyFish() {
       TODO: maybe adjust the fish velocity to occasionally increase or decrease?
       modify current velocity by adding or subtracting a small amount
       */
-
+      // eslint-disable-next-line no-console
+      console.log('zposition: ' + fishRef.current.position.z);
+      console.log('yrotation: ' + fishRef.current.rotation.y);
       /*
       TODO: adjust the direction of movement relative to the rotation:
       The fish should always travel straight forward from its POV
       */
 
-      targetFish.current.position.y = Math.sin(time * 2) * (Math.PI * -0.01);
       //bob up and down a little
-      //targetFish.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
+      fishRef.current.position.y = Math.sin(time * 2) * (Math.PI * -0.03);
 
+      //targetFish.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       // fishRef.current.position.z = Math.cos(time) * (Math.PI * -0.5);
+      fishRef.current.position.z = ((Math.sin(time / 3) * (Math.PI * 0.965)));
+
+      //   fishRef.current.position.z = ((Math.sin(time / 3) * (Math.PI * 1.2746)) % 6);
+      // }
+      // else fishRef.current.position.z = (3 - ((time / 3) * (Math.PI * 0.5)) % 3);
+
     };
 
     updateFishPathing(fishRef);
