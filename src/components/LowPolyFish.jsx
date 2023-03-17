@@ -11,7 +11,7 @@ export default function LowPolyFish() {
   const fishRef = useRef();
 
   const rotation = [0, 0, 0];
-
+  let zVelocity = 0.01;
 
 
 
@@ -22,18 +22,20 @@ export default function LowPolyFish() {
 
       //const fishMovementInPlace = fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
-      if (targetFish.current.position.z > 3) {
+      if (targetFish.current.position.z >= 2.665) {
         fishRef.current.rotation.y = 160;
+        zVelocity = -0.03 * Math.random();
       }
-      else if (targetFish.current.position.z < -3) {
+      else if (targetFish.current.position.z <= -3) {
         fishRef.current.rotation.y = 0;
+        zVelocity = 0.03 * Math.random();
       }
 
       let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 1000;
 
       if (rando > 95) {
         const rotationXWeight = 2;
-        const rotationYWeight = 5;
+        const rotationYWeight = 7;
 
         let randRotationX = (Math.random() / 100 * rotationXWeight);
         let randRotationY = (Math.random() / 100 * rotationYWeight);
@@ -57,8 +59,8 @@ export default function LowPolyFish() {
       modify current velocity by adding or subtracting a small amount
       */
       // eslint-disable-next-line no-console
-      console.log('zposition: ' + fishRef.current.position.z);
-      console.log('yrotation: ' + fishRef.current.rotation.y);
+      // console.log('zposition: ' + fishRef.current.position.z);
+      // console.log('yrotation: ' + fishRef.current.rotation.y);
       /*
       TODO: adjust the direction of movement relative to the rotation:
       The fish should always travel straight forward from its POV
@@ -69,9 +71,8 @@ export default function LowPolyFish() {
 
       //targetFish.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       // fishRef.current.position.z = Math.cos(time) * (Math.PI * -0.5);
-      fishRef.current.position.z = ((Math.sin(time / 3) * (Math.PI * 0.965)));
-
-      //   fishRef.current.position.z = ((Math.sin(time / 3) * (Math.PI * 1.2746)) % 6);
+      // fishRef.current.position.z = ((Math.sin(time / 3) * (Math.PI * 0.965)));
+      fishRef.current.position.z = fishRef.current.position.z + zVelocity;
       // }
       // else fishRef.current.position.z = (3 - ((time / 3) * (Math.PI * 0.5)) % 3);
 
