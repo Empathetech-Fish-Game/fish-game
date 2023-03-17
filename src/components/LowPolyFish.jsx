@@ -31,7 +31,7 @@ export default function LowPolyFish() {
         zVelocity = 0.03 * Math.random();
       }
 
-      let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 1000;
+      let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 100
 
       if (rando > 95) {
         const rotationXWeight = 2;
@@ -49,7 +49,7 @@ export default function LowPolyFish() {
         }
 
         //rotate the fish along the X and Y axes:
-        //targetFish.current.rotation.x = targetFish.current.rotation.x + randRotationX;
+        targetFish.current.rotation.x = targetFish.current.rotation.x + randRotationX;
         targetFish.current.rotation.y = targetFish.current.rotation.y + randRotationY;
 
       }
@@ -58,23 +58,18 @@ export default function LowPolyFish() {
       TODO: maybe adjust the fish velocity to occasionally increase or decrease?
       modify current velocity by adding or subtracting a small amount
       */
-      // eslint-disable-next-line no-console
-      // console.log('zposition: ' + fishRef.current.position.z);
-      // console.log('yrotation: ' + fishRef.current.rotation.y);
+
       /*
       TODO: adjust the direction of movement relative to the rotation:
       The fish should always travel straight forward from its POV
       */
+      // eslint-disable-next-line no-console
+      // console.log('yrotation: ' + fishRef.current.rotation.y);
 
       //bob up and down a little
       fishRef.current.position.y = Math.sin(time * 2) * (Math.PI * -0.03);
 
-      //targetFish.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
-      // fishRef.current.position.z = Math.cos(time) * (Math.PI * -0.5);
-      // fishRef.current.position.z = ((Math.sin(time / 3) * (Math.PI * 0.965)));
       fishRef.current.position.z = fishRef.current.position.z + zVelocity;
-      // }
-      // else fishRef.current.position.z = (3 - ((time / 3) * (Math.PI * 0.5)) % 3);
 
     };
 
