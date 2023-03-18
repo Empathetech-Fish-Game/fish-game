@@ -11,12 +11,10 @@ export default function LowPolyFish() {
   const fishRef = useRef();
 
   const rotation = [0, 0, 0];
-  let zVelocity = 0.01;
-  let xVelocity = 0;
-  let yVelocity = 0;
-  let yOffset = 0;
-  let turnWeight = 3;
-  let rotYOffset = 0;
+  let zVelocity = 0;
+  let xVelocity = 0.03;
+
+
 
   useFrame(({ clock }) => {
     const time = clock.elapsedTime;
@@ -29,18 +27,10 @@ export default function LowPolyFish() {
         fishRef.current.rotation.y = 160;
         zVelocity = -0.03 * Math.random();
       }
-      else if (targetFish.current.position.z <= -2.6) {
+      else if (targetFish.current.position.z <= -3) {
         fishRef.current.rotation.y = 0;
         zVelocity = 0.03 * Math.random();
       }
-      xVelocity = targetFish.current.rotation.x * zVelocity * turnWeight;
-      if (zVelocity > 0) {
-        rotYOffset = targetFish.current.rotation.y;
-      }
-      else {
-        rotYOffset = 160 - targetFish.current.rotation.y;
-      }
-      yVelocity = rotYOffset * zVelocity * turnWeight;
 
       let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 100
 
@@ -48,10 +38,8 @@ export default function LowPolyFish() {
         const rotationXWeight = 2;
         const rotationYWeight = 7;
 
-        //randomize the fish velocity
         let randRotationX = (Math.random() / 100 * rotationXWeight);
         let randRotationY = (Math.random() / 100 * rotationYWeight);
-
 
         //half the time, rotate in the other direction.
         if (Math.random() < 0.5) {
@@ -68,7 +56,7 @@ export default function LowPolyFish() {
       }
 
       /*
-      TODO:
+      TODO: maybe adjust the fish velocity to occasionally increase or decrease?
       modify current velocity by adding or subtracting a small amount
       */
 
@@ -76,16 +64,13 @@ export default function LowPolyFish() {
       TODO: adjust the direction of movement relative to the rotation:
       The fish should always travel straight forward from its POV
       */
-      // eslint-disable-next-line no-console
-      console.log('Yrot: ' + targetFish.current.rotation.y);
+      //eslint-disable-next-line no-console
+      console.log('xrotation: ' + targetFish.current.rotation.x);
 
-      yOffset = yOffset + yVelocity;
       //bob up and down a little
-      targetFish.current.position.y = (Math.sin(time * 2) * (Math.PI * -0.03)) + yOffset;
+      targetFish.current.position.y = Math.sin(time * 2) * (Math.PI * -0.03);
 
       targetFish.current.position.z = targetFish.current.position.z + zVelocity;
-      targetFish.current.position.x = targetFish.current.position.x + xVelocity;
-
 
     };
 
