@@ -5,13 +5,33 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { RigidBody } from '@react-three/rapier';
 
+//improved console logging to better view realtime fish data
+var vlog = (function() {
+  return {
+    log: function() {
+      var args = Array.prototype.slice.call(arguments);
+      // eslint-disable-next-line no-console
+      console.log.apply(console, args);
+    },
+    warn: function() {
+      var args = Array.prototype.slice.call(arguments);
+      // eslint-disable-next-line no-console
+      console.warn.apply(console, args);
+    },
+    error: function() {
+      var args = Array.prototype.slice.call(arguments);
+      // eslint-disable-next-line no-console
+      console.error.apply(console, args);
+    }
+  };
+}());
 
 export default function LowPolyFish() {
   const fish = useGLTF('/models/Fish.glb');
   const fishRef = useRef();
 
   const rotation = [0, 0, 0];
-  let zVelocity = 0.01;
+  let zVelocity = 0.03;
   let xVelocity = 0;
   let yVelocity = 0;
   let yOffset = 0;
@@ -22,18 +42,22 @@ export default function LowPolyFish() {
     const time = clock.elapsedTime;
 
     const updateFishPathing = (targetFish) => {
-
-      //const fishMovementInPlace = fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
+      //tail movement:
       //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
+
+      //if the fish reaches a fishtank wall, turn and swim away from that wall
       if (targetFish.current.position.z >= 2.3) {
         fishRef.current.rotation.y = 160;
         zVelocity = -0.03 * (Math.random() + 0.35);
       }
+
       else if (targetFish.current.position.z <= -2.6) {
         fishRef.current.rotation.y = 0;
         zVelocity = 0.03 * (Math.random() + 0.5);
       }
+
       xVelocity = targetFish.current.rotation.x * zVelocity * turnWeight;
+
       if (zVelocity > 0) {
         rotYOffset = targetFish.current.rotation.y;
       }
@@ -76,8 +100,16 @@ export default function LowPolyFish() {
       TODO: adjust the direction of movement relative to the rotation:
       The fish should always travel straight forward from its POV
       */
-      // eslint-disable-next-line no-console
-      console.log('Yrot: ' + targetFish.current.rotation.y);
+
+      let fishData = {
+        xPos: targetFish.current.position.x, yPos: targetFish.current.position.y,
+        // zPos: targetFish.current.position.z,
+        xRot: targetFish.current.rotation.x, yRot: targetFish.current.rotation.y,
+        xVel: xVelocity, yVel: yVelocity, zVel: zVelocity,
+      };
+
+      vlog.log(fishData);
+
 
       yOffset = yOffset + yVelocity;
       //bob up and down a little
@@ -85,8 +117,6 @@ export default function LowPolyFish() {
 
       targetFish.current.position.z = targetFish.current.position.z + zVelocity;
       targetFish.current.position.x = targetFish.current.position.x + xVelocity;
-
-
     };
 
     updateFishPathing(fishRef);
