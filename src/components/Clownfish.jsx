@@ -26,8 +26,8 @@ var vlog = (function() {
   };
 }());
 
-export default function LowPolyFish({ rotation, position }) {
-  const fish = useGLTF('/models/Fish.glb');
+export default function Clownfish({ rotation, position }) {
+  const fish = useGLTF('/Clownfish.glb');
   const fishRef = useRef();
 
   let zVelocity = 0.03;
@@ -107,7 +107,7 @@ export default function LowPolyFish({ rotation, position }) {
         xVel: xVelocity, yVel: yVelocity, zVel: zVelocity,
       };
 
-      // vlog.log(fishData);
+    //   vlog.log(fishData);
 
 
       yOffset = yOffset + yVelocity;
@@ -125,7 +125,7 @@ export default function LowPolyFish({ rotation, position }) {
 
 
   return (
-    <group ref={fishRef} scale={0.1} position={position} rotation={rotation}>
+    <group ref={fishRef} scale={0.25} position={position} rotation={rotation}>
       <RigidBody gravityScale={0} colliders="ball" type="dynamic">
         <primitive object={fish.scene} />
       </RigidBody>
