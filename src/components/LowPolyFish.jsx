@@ -31,6 +31,7 @@ export default function LowPolyFish() {
   const fishRef = useRef();
 
   const rotation = [0, 0, 0];
+  const position = [0, 0, 0];
   let zVelocity = 0.03;
   let xVelocity = 0;
   let yVelocity = 0;
@@ -126,7 +127,7 @@ export default function LowPolyFish() {
 
 
   return (
-    <group ref={fishRef} scale={0.1} position={[0, 0, 0]} rotation={rotation}>
+    <group ref={fishRef} scale={0.1} position={position} rotation={rotation}>
       <RigidBody gravityScale={0} colliders="ball" type="dynamic">
         <primitive object={fish.scene} />
       </RigidBody>
