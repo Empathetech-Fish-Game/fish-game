@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 import { Loader, OrbitControls, Environment } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import './App.css';
 import * as THREE from 'three';
 import { ACESFilmicToneMapping, sRGBEncoding } from 'three';
-import { Suspense, useRef } from 'react';
+import { Suspense } from 'react';
 import TankWater from './components/TankWater';
 import LowPolyFish from './components/LowPolyFish';
 import { Debug, Physics } from '@react-three/rapier';
