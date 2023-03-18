@@ -17,11 +17,11 @@ const Corals = ({ dimensions, num }) => {
         let curr = ind % 7;
         return (
           <Coral
-            scale={Math.random() * 0.02 + 0.06}
+            scale={Math.random() * 0.02 + 0.01}
             position={[
-              (Math.random() - 0.5) * 0.8 * x,
+              (Math.random() - 0.5) * 0.2 * x,
               -0.5 * y,
-              (Math.random() - 0.5) * 0.8 * z,
+              (Math.random() - 0.5) * 0.1 * z,
             ]}
             rotation={[0, 3.141 * Math.random(), 0]}
             index={curr}

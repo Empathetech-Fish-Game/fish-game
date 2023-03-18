@@ -11,7 +11,7 @@ export default function TankWall() {
       position={[0, 0, 3.05]}
       gravityScale={0}
       sensor
-      onIntersectionEnter={() => console.log('Wall hit')}
+      // onIntersectionEnter={() => console.log('Wall hit')}
     >
       <mesh>
         <boxGeometry args={[12.2, 8, 0.1]} />

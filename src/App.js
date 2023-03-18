@@ -6,10 +6,16 @@ import * as THREE from 'three';
 import { ACESFilmicToneMapping, sRGBEncoding } from 'three';
 import { Suspense, useRef } from 'react';
 import TankWater from './components/TankWater';
-import LowPolyFishes from './components/LowPolyFishes';
+import LowPolyFish from './components/LowPolyFish';
 import { Debug, Physics } from '@react-three/rapier';
 import Corals from './components/Corals';
-import Tank from './components/Tank';
+import TankWallRear from './components/TankWallRear';
+import TankWallFront from './components/TankWallFront';
+import TankWallLeft from './components/TankWallLeft';
+import TankWallRight from './components/TankWallRight';
+import TankWallBottom from './components/TankWallBottom';
+import Clownfish from './components/Clownfish';
+import Goldfish from './components/Goldfish';
 
 export default function App() {
   return (
@@ -29,7 +35,15 @@ export default function App() {
         }}
       >
         <color attach="background" args={['#0a0a0a']} />
-        <Corals dimensions={[30, 19.8, 20]} num={100} />
+        <Corals dimensions={[57, 8, 60]} num={100} />
+        <ambientLight intensity={5} />
+        <spotLight intensity={2} args={[0, 3, 4]} />
+        <pointLight position={[20, 10, -10]} intensity={2} />
+        {<Environment
+          background
+          blur={0.04}
+          files={'./hall_of_finfish_4k.hdr'}
+        />}
         <ambientLight intensity={5} />
         <spotLight intensity={2} args={[0, 3, 4]} />
         <pointLight position={[20, 10, -10]} intensity={2} />
@@ -41,9 +55,16 @@ export default function App() {
           panSpeed={0.5}
         />
         <Physics>
-          <Debug />
-          <Tank />
-          <LowPolyFishes num={100} />
+          <LowPolyFish rotation={[0, 0, 0]} position={[0, 0, 0]} />
+          <Clownfish rotation={[0, 0, 0]} position={[3, 4, 2]} />
+          <Goldfish rotation={[0, 0, 0]} position={[-3, 4, -4]} />
+          <TankWallRear />
+          <TankWallFront />
+          <TankWallLeft />
+          <TankWallRight />
+          <TankWallBottom />
+
+          <TankWater />
         </Physics>
       </Canvas>
     </Suspense>
