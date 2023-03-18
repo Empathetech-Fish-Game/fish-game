@@ -27,18 +27,18 @@ export default function LowPolyFish() {
       //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       if (targetFish.current.position.z >= 2.3) {
         fishRef.current.rotation.y = 160;
-        zVelocity = -0.03 * Math.random();
+        zVelocity = -0.03 * (Math.random() + 0.35);
       }
       else if (targetFish.current.position.z <= -2.6) {
         fishRef.current.rotation.y = 0;
-        zVelocity = 0.03 * Math.random();
+        zVelocity = 0.03 * (Math.random() + 0.5);
       }
       xVelocity = targetFish.current.rotation.x * zVelocity * turnWeight;
       if (zVelocity > 0) {
         rotYOffset = targetFish.current.rotation.y;
       }
       else {
-        rotYOffset = 160 - targetFish.current.rotation.y;
+        rotYOffset = -(160 - targetFish.current.rotation.y);
       }
       yVelocity = rotYOffset * zVelocity * turnWeight;
 
