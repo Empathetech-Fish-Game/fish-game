@@ -5,8 +5,8 @@
   "author": "Ryan J. Parker",
   "dependencies": {
     "@react-spring/web": "^9.6.1",
-    "@react-three/drei": "^9.56.5",
-    "@react-three/fiber": "^8.10.1",
+    "@react-three/drei": "^9.56.17",
+    "@react-three/fiber": "^8.10.4",
     "@react-three/rapier": "^0.12.2",
     "gsap": "^3.11.4",
     "leva": "^0.9.34",

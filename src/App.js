@@ -1,18 +1,16 @@
 /* eslint-disable react/no-unknown-property */
 import { Loader, OrbitControls, Environment } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import './App.css';
 import * as THREE from 'three';
 import { ACESFilmicToneMapping, sRGBEncoding } from 'three';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import TankWater from './components/TankWater';
-import LowPolyFish from './components/LowPolyFish';
+import LowPolyFishes from './components/LowPolyFishes';
 import { Debug, Physics } from '@react-three/rapier';
-import TankWallRear from './components/TankWallRear';
-import TankWallFront from './components/TankWallFront';
-import TankWallLeft from './components/TankWallLeft';
-import TankWallRight from './components/TankWallRight';
-import TankWallBottom from './components/TankWallBottom';
+import Corals from './components/Corals';
+import Tank from './components/Tank';
+
 export default function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -31,16 +29,10 @@ export default function App() {
         }}
       >
         <color attach="background" args={['#0a0a0a']} />
-        {/* {<Environment
-          background
-          blur={0.04}
-          files={'./hall_of_finfish_4k.hdr'}
-        />} */}
+        <Corals dimensions={[30, 19.8, 20]} num={100} />
         <ambientLight intensity={5} />
         <spotLight intensity={2} args={[0, 3, 4]} />
         <pointLight position={[20, 10, -10]} intensity={2} />
-        <primitive object={new THREE.AxesHelper(2)} />
-        <primitive object={new THREE.GridHelper(20, 20)} />
         <OrbitControls
           makeDefault
           enableDamping
@@ -50,14 +42,8 @@ export default function App() {
         />
         <Physics>
           <Debug />
-          <LowPolyFish />
-          <TankWallRear />
-          <TankWallFront />
-          <TankWallLeft />
-          <TankWallRight />
-          <TankWallBottom />
-
-          <TankWater />
+          <Tank />
+          <LowPolyFishes num={100} />
         </Physics>
       </Canvas>
     </Suspense>
