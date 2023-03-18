@@ -22,7 +22,7 @@ export default function LowPolyFish() {
 
       //const fishMovementInPlace = fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
       //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
-      if (targetFish.current.position.z >= 2.665) {
+      if (targetFish.current.position.z >= 2.3) {
         fishRef.current.rotation.y = 160;
         zVelocity = -0.03 * Math.random();
       }
