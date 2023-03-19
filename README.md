@@ -1,42 +1,19 @@
-# React Three Fiber Base Template
+# Virtual Fish Tank
 
-### This template provides an easy starting point for R3F apps.
-### <code>Side-step the initial scene setup and dive right in.</code>
+### Built with React Three Fiber, Drei, and Rapier.
+### Built over two half-day sprints for the Empathetech March Fo(u)rth Hackathon
+<img src="https://user-images.githubusercontent.com/107072854/226153930-6d2830c7-8773-442e-b94e-c87f0dd09c87.png" height="500px" width="auto" />
 
 
-> #### Comes packaged with: 
-> * Animated cube mesh with <b>useFrame</b> & <b>onClick</b> wired up
-> * <b>Text3D</b> with pre-imported custom <b>font</b> and <b>matcap</b> material
-> * A <b>GridHelper</b> and <b>AxesHelper</b> rendered as primitive objects
-> * <b>Lights</b>, managed <b>orbit controls</b>, and <b>suspense</b> with loading spinner fallback
+> #### Features: 
+> * Animated fish GLTF models
+> * Movement simulated by re-rendering the fish at a new position on every frame refresh
+> * Collision detection using Rapier <RigidBody /> tags
+> * A slightly blurred 4K HDRI background
+> * Coral GLTF models
 > * Dependencies: 
 >    - R3F  
 >    - R3Rapier  
 >    - R3Drei  
->    - React Spring  
 >    - Leva  
->    - Zustand  
->    - GSAP  
 >    - Three  
-
-To start, simply run
-
-- `npm install`
-- `npm start`
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
