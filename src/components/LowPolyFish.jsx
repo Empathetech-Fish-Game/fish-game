@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import { RigidBody } from '@react-three/rapier';
 
 //improved console logging to better view realtime fish data
-var vlog = (function() {
+let vlog = (function() {
   return {
     log: function() {
       var args = Array.prototype.slice.call(arguments);
@@ -47,12 +47,12 @@ export default function LowPolyFish({ rotation, position }) {
       //if the fish reaches a fishtank wall, turn and swim away from that wall
       if (targetFish.current.position.z >= 2.3) {
         fishRef.current.rotation.y = 160;
-        zVelocity = -0.03 * (Math.random() + 0.35);
+        zVelocity = -0.03 * (Math.random() + 0.25);
       }
 
       else if (targetFish.current.position.z <= -2.6) {
         fishRef.current.rotation.y = 0;
-        zVelocity = 0.03 * (Math.random() + 0.5);
+        zVelocity = 0.03 * (Math.random() + 0.25);
       }
 
       xVelocity = targetFish.current.rotation.x * zVelocity * turnWeight;
@@ -68,10 +68,10 @@ export default function LowPolyFish({ rotation, position }) {
       let rando = Math.floor(Math.random() * 100) + 1; //random int between 1 and 100
 
       if (rando > 95) {
-        const rotationXWeight = 2;
-        const rotationYWeight = 7;
+        const rotationXWeight = 1.5;
+        const rotationYWeight = 5;
 
-        //randomize the fish velocity
+        //randomize the fish rotation
         let randRotationX = (Math.random() / 100 * rotationXWeight);
         let randRotationY = (Math.random() / 100 * rotationYWeight);
 
