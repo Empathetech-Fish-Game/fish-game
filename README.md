@@ -8,6 +8,7 @@
 > #### Features: 
 > * Animated fish GLTF models
 > * Movement simulated by re-rendering the fish at a new position on every frame refresh
+> * Dynamic fish movement variation using programmatic decision-making
 > * Collision detection using Rapier <RigidBody /> tags
 > * A slightly blurred 4K HDRI background
 > * Coral GLTF models
