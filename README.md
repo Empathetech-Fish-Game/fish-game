@@ -11,7 +11,7 @@
 > * Dynamic fish movement variation using programmatic decision-making
 > * Collision detection using Rapier <RigidBody /> tags
 > * A slightly blurred 4K HDRI background
-> * Procedurally generated coral GLTF models
+> * Procedurally distributed coral GLTF models
 > * Dependencies: 
 >    - R3F  
 >    - R3Rapier  
