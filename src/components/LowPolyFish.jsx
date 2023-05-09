@@ -44,7 +44,8 @@ export default function LowPolyFish({ rotation, position }) {
       //tail movement:
       //fishRef.current.rotation.y = (0.75 * Math.sin(time) * 0.5) / Math.PI;
 
-      //if the fish reaches a fishtank wall, turn and swim away from that wall
+      /* Keep the fish inside the tank: */
+      //if the fish reaches the front or back wall, turn and swim away from that wall
       if (targetFish.current.position.z >= 2.3) {
         fishRef.current.rotation.y = 160;
         zVelocity = -0.03 * (Math.random() + 0.35);
@@ -54,6 +55,28 @@ export default function LowPolyFish({ rotation, position }) {
         fishRef.current.rotation.y = 0;
         zVelocity = 0.03 * (Math.random() + 0.5);
       }
+
+      //if the fish moves beyond the top or bottom of the tank,
+      //reset the y position to keep it in the tank
+      if (yOffset > 4) {
+        // zVelocity = -0.03 * (Math.random() + 0.35);
+        yOffset = 4;
+      }
+
+      else if (yOffset < -2) {
+        yOffset = -2;
+        // zVelocity = 0.03 * (Math.random() + 0.35);
+      }
+
+      //if the fish moves beyond the left or right tank walls,
+      //reset the x position to keep it in the tank
+      if (targetFish.current.position.x > 6) {
+        targetFish.current.position.x = 6;
+      }
+      else if (targetFish.current.position.x < -6) {
+        targetFish.current.position.x = -6;
+      }
+
 
       xVelocity = targetFish.current.rotation.x * zVelocity * turnWeight;
 
@@ -91,12 +114,7 @@ export default function LowPolyFish({ rotation, position }) {
       }
 
       /*
-      TODO:
-      modify current velocity by adding or subtracting a small amount
-      */
-
-      /*
-      TODO: adjust the direction of movement relative to the rotation:
+      Adjust the direction of movement relative to the rotation:
       The fish should always travel straight forward from its POV
       */
 
@@ -109,13 +127,10 @@ export default function LowPolyFish({ rotation, position }) {
 
       // vlog.log(fishData);
 
+      targetFish.current.position.x += xVelocity;
+      targetFish.current.position.y = yOffset;
+      targetFish.current.position.z += zVelocity;
 
-      yOffset = yOffset + yVelocity;
-      //bob up and down a little
-      targetFish.current.position.y = (Math.sin(time * 2) * (Math.PI * -0.03)) + yOffset;
-
-      targetFish.current.position.z = targetFish.current.position.z + zVelocity;
-      targetFish.current.position.x = targetFish.current.position.x + xVelocity;
     };
 
     updateFishPathing(fishRef);
